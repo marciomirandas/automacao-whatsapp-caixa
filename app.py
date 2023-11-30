@@ -46,19 +46,19 @@ def apaga_conversa():
         except:
             continue
 
-        if menu.text == 'Apagar conversa':
+        if menu.text == 'Apagar conversa' or menu.text == 'Delete chat':
             try:
                 menu.click()
                 time.sleep(2)
             except:
                 break
 
-            # Clica na mensagem que pode aparecer antes
+            """# Clica na mensagem que pode aparecer antes
             try:
                 driver.find_element(By.CLASS_NAME, 'oixtjehm').click()
                 time.sleep(2)
             except:
-                pass
+                pass"""
             
             # Clica para apagar a conversa
             try:
@@ -212,27 +212,23 @@ def enviar_pdf():
 
     # Clica para abrir o arquivo
     try:
-        driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div/div/div/div').click()
+        driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div/div/div').click()
         time.sleep(1)
-        driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div/div/span/div/ul/div/div[4]/li/div').click()
+        driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div/div/span/div/ul/div/div[1]/li').click()
         time.sleep(4)
     except:
-        try:
-            driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div').click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[5]/button').click()
-            time.sleep(4)
-        except:
-            logging.info('Erro ao clicar em anexo')
-            raise ValueError("error")
+        logging.info('Erro ao clicar em anexo')
+        raise ValueError("error")
     
     # Envia o arquivo
     try:
         pyautogui.typewrite(arquivo)
         time.sleep(1)
+        
         pyautogui.press('enter')
         time.sleep(4)
-        driver.find_element(By.XPATH, '//*[@id="app"]/div/div/div[3]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div').click()
+        
+        driver.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div/span').click()
         time.sleep(10)
     except:
         logging.info('Erro ao enviar o arquivo')
